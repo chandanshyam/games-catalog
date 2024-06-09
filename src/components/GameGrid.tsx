@@ -37,6 +37,7 @@ const GameGrid = ({ selectedGenre, selectedPlatform }: Props) => {
         ))}
       </SimpleGrid>
     </>
+
   );
 };
 

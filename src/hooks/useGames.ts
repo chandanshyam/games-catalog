@@ -1,14 +1,7 @@
-import { useEffect, useState } from "react";
-import apiClient from "../services/api-client";
-import { CanceledError } from "axios";
+import useData from "./useData";
+import { Genre } from "./useGenre";
+import { Platform } from "./usePlatforms";
 
-
-export interface Platform{
-  id: number,
-  name: string,
-  slug: string,
-
-}
 
 export interface Game {
     id: number;
@@ -18,29 +11,6 @@ export interface Game {
     metacritic: number
   }
   
-  interface FetchGamesList {
-    count: number;
-    results: Game[];
-  }
+const useGames = (selectedGenre: Genre | null, selectedPlatform: Platform | null) => useData<Game>('/games', {params: { genres: selectedGenre?.id, platforms: selectedPlatform?.id}},[selectedGenre?.id, selectedPlatform?.id]);
 
-const useGames = () =>
-    {
-        const [games, setGames] = useState<Game[]>([]);
-        const [error, setError] = useState("");
-      
-        const controller = new AbortController();
-        useEffect(() => {
-          apiClient
-            .get<FetchGamesList>("/games", {signal : controller.signal})
-            .then((res) => setGames(res.data.results))
-            .catch((err) => {
-              if(err instanceof CanceledError) return;
-              setError(err.message)}
-          );
-//  return controller.abort; throws error Invalid Invocation error
-        }, []);
-
-        return { games, error };
-    } ;
-
-    export default useGames;
+export default useGames;

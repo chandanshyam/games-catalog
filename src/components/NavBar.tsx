@@ -4,6 +4,7 @@ import ColorModeSwitch from "./ColorModeSwitch";
 import SearchInput from "./SearchInput";
 import useData from "../hooks/useData";
 
+
 interface Props {
   onSearch: (searchText: string) => void;
 }

@@ -6,6 +6,7 @@ import { useState } from "react";
 import { Genre } from "./hooks/useGenre";
 import PlatformSelector from "./components/PlatformSelector";
 import { Platform } from "./hooks/usePlatforms";
+
 import SortSelector from "./components/SortSelector";
 
 export interface GameQuery {
